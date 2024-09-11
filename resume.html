@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .resume-container {
+          font-family: Arial, sans-serif;
+          color: #333;
+          line-height: 1.6;
+        }
+        
+        .education-list div{
+            display:flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .education-list div span{
+            width: 200px;
+
+        }
+
+        .header {
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: white;
+        }
+        
+        .header-content {
+          background-color: rgba(0, 0, 0, 0.5);
+          padding: 20px;
+          border-radius: 10px;
+        }
+        
+        .header h1 {
+          font-size: 2.5em;
+          margin-bottom: 10px;
+        }
+        
+        .social-links {
+          margin-top: 20px;
+        }
+        
+        .social-links button {
+          background-color: white;
+          color: #333;
+          border: none;
+          padding: 5px 10px;
+          margin: 0 5px;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+        
+        section {
+          padding: 40px 20px;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        
+        h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        
+        .skills-list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+        }
+        
+        .skill-badge {
+          background-color: #f0f0f0;
+          padding: 5px 10px;
+          border-radius: 15px;
+        }
+        
+        .experience-item {
+          background-color: #f9f9f9;
+          padding: 15px;
+          margin-bottom: 15px;
+          border-radius: 5px;
+        }
+        
+        .experience-item h3 {
+          margin-bottom: 5px;
+        }
+        
+        .period {
+          font-style: italic;
+          color: #666;
+        }
+        
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        
+        input, textarea {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+        
+        textarea {
+          height: 100px;
+        }
+        
+        button[type="submit"] {
+          background-color: #007bff;
+          color: white;
+          border: none;
+          padding: 10px;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+        
+        footer {
+          text-align: center;
+          padding: 20px;
+          background-color: #f0f0f0;
+        }
+        
+        @media (max-width: 600px) {
+          .header {
+            height: 300px;
+          }
+        
+          .header h1 {
+            font-size: 2em;
+          }
+        }
+    </style>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div class="resume-container">
+            <header class="header">
+            <div class="header-content">
+                <h1>张三</h1>
+                <p>全栈开发工程师</p>
+                <div class="social-links">
+                    <button>GitHub</button>
+                    <button>LinkedIn</button>
+                    <button>Email</button>
+                </div>
+            </div>
+            <div class="photo" style="padding-left: 100px;">
+                <img src="./static/IMG_5571.JPG">
+            </div>
+            </header>
+        
+            <section class="basic-information">
+                <h2>基本信息</h2>
+                <div class="information-list">
+                    <div style="width: 400px;display: inline-block;" v-for="(value,key) in basicInformation" :key="key">
+                        <label for="key">{{value.key}}：</label>
+                        <span id="key">{{value.value}}</span>
+                    </div>
+                </div>
+            </section>
+
+            <section style="padding-top: 30px;" class="skills-section">
+            <h2>个人技能</h2>
+            <div class="skills-list">
+                <span style="width: 800px;" v-for="(skill,index) in skills" :key="index" class="skill-badge">
+                {{ skill.key }}：{{skill.description}}
+                </span>
+            </div>
+            </section>
+
+            <section class="education-section">
+                <h2>教育背景</h2>
+                <div class="education-list">
+                    <div>
+                        <span>2016.09-2020.06</span>
+                        <span>浙江理工大学</span>
+                        <span>电子信息科学与技术 本科</span>                        
+                    </div>
+                    <div>
+                        <span>2020.09-至今</span>
+                        <span>浙江理工大学</span>
+                        <span>计算机科学与技术 研究生</span>                        
+                    </div>
+                </div>
+            </section>
+        
+            <section class="experience-section">
+            <h2>实习经历</h2>
+            <div class="experience-list">
+                <div style="position: relative;" class="experience-item">
+                    <h3>系统运维</h3>
+                    <div>
+                        <span>杰华特微电子有限公司</span>
+                        <span style="position: absolute; right: 30px;" class="period">2023.10-2024.08</span>                        
+                    </div>
+
+                    <div>
+                        <h4>负责任务：</h4>
+                        <ul>
+                            <li>根据其余业务部门所提的需求，在已有的ERP系统以及OA系统上进行个性化开发。</li>
+                            <li>
+                                <p>负责所属模块的代码开发，测试与维护工作。</p>
+                                <p><strong>涉及技术：</strong>Jquery、JavaScript、easyui、SQL server。</p>
+                            </li>
+                            <li>
+                                <p>网站部署任务，将所写好的静态页面部署到公网上。</p>
+                                <p><strong>涉及技术：</strong>nginx服务器、apache服务器、Linux、icdsoft网站寄存服务商。</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </section>
+        
+            <section style="padding-top: 30px;" class="projects-section">
+                <h2>项目经历</h2>
+                <div class="projects-list">
+                    <ul>
+                        <div style="width: 800px;" v-for="(item,index) in projectExp" :key="index" class="skill-badge">
+                            <p>{{index+1}}、{{item.name}}</p>
+                            <p>个人职责：{{item.personResponsibility}}</p>
+                            <p>涉及技术：{{item.involvingTechnology}}</p>
+                        </div>                        
+                    </ul>
+
+                </div>
+            </section>
+
+            <section class="contact-section">
+            <h2>联系我</h2>
+            <form @submit.prevent="submitForm">
+                <input v-model="form.name" type="text" placeholder="姓名">
+                <input v-model="form.email" type="email" placeholder="邮箱">
+                <textarea v-model="form.message" placeholder="消息"></textarea>
+                <button type="submit">发送</button>
+            </form>
+            </section>
+        
+            <footer>
+            <p>&copy; 2023 张三. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+<script>
+    // 阻止vue在启动时生成生产提示
+    Vue.config.devtools = false;
+    new Vue({
+        el:"#root",
+        data:{
+            basicInformation:{
+                englishName:{key:'姓名',value:'Carling'},
+                birthDate:{key:'出生年月',value:'1998.07'},
+                nation:{key:'民族',value:'汉族'},
+                height:{key:'身高',value:'173cm'},
+                address:{key:'地址',value:'浙江省杭州市'},
+                politicalOutlook:{key:'政治面貌',value:'中共党员'},
+                phone:{key:'手机号码',value:'15988816911'},
+                school:{key:'毕业院校',value:'浙江理工大学'},
+                email:{key:'电子邮箱',value:'1007703808@qq.com'},
+                eduBackground:{key:'学历',value:'硕士'}
+            },
+            skills: [{key:'编程语言',description:'熟悉C、C#、python、java、sql、javascript、jquery、html、css、less编程语言等。'},
+                     {key:'数据结构与算法',description:'熟悉常用的数据结构，如：栈、队列、二叉树等；熟悉贪心、二分查找、动态规划等算法。'},
+                     {key:'数据库',description:'熟悉Redis、Mysql、SQL server的基本原理及使用，了解关系型数据库中的逻辑架构、索引、事务及锁机制。'},
+                     {key:'开发工具',description:'熟悉使用VScode、IDEA、Docker、Pycharm、Datagrip等；了解基本Linux指令，有Linx项目部署经验。'},
+                     {key:'框架知识',description:'了解Vue2、React、AJAX、SpringBoot、Mybatis、Maven等常用框架。'},
+                     {key:'英语水平',description:'CET-6。'}],
+            experiences: [
+                { title: '系统运维', company: '杰华特微电子有限公司', period: '2023.10 - 2024.8' },
+            ],
+            form: {
+                name: '',
+                email: '',
+                message: ''
+            },
+            projectExp:[
+                {
+                    name:'杰华特官网项目',
+                    personResponsibility:'收集各业务部门的数据并进行数据整理，将其导入输入数据库，并撰写后端接口供给前端使用。',
+                    involvingTechnology:'C#、SQL server、html、css、js等。'
+                },{
+                    name:'硅谷云音乐微信小程序',
+                    personResponsibility:'搭建一个微信小程序版本的网易云音乐前端页面。',
+                    involvingTechnology:'PubSub订阅接收信息、wx.request（）访问网易云音乐后端获取资源。'
+                },{
+                    name:'word上传服务器去除水印并加水印（c# web api）（自动化办公）',
+                    personResponsibility:'在erp系统中创建相应的前端页面，在后端接收前端所上传的文件并将其进行去水印加水印操作，供给前端浏览。',
+                    involvingTechnology:'c#、microsoft.Office.Interop.Word框架操作word（去水印加水印）、iTextSharp给pdf加水印、IIS发布网站等。'
+                },{
+                    name:'官网静态网页',
+                    personResponsibility:'在原有静态页面上，编写php程序使得可以进行前后端交互，允许上传pdf规格书文件生成相应的器件数据并存入数据库。',
+                    involvingTechnology:'Mysql、php、html、css、js等。'
+                },{
+                    name:'公司it流程编写',
+                    personResponsibility:'前端表单编写，T-sql将表单数据导入数据库，并发起流程。',
+                    involvingTechnology:'SQL server。'
+                },
+            ]
+        },      
+        methods: {
+            submitForm() {
+                console.log('Form submitted:', this.form)
+                this.form = { name: '', email: '', message: '' }
+            }
+        }
+    })
+
+    </script>
+</html>
