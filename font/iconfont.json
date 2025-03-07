@@ -1,0 +1,65 @@
+{
+  "id": "4848399",
+  "name": "个人简历",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "114813",
+      "name": "个人技能",
+      "font_class": "gerenjineng",
+      "unicode": "e6f6",
+      "unicode_decimal": 59126
+    },
+    {
+      "icon_id": "943205",
+      "name": "教育经历",
+      "font_class": "jiaoyujingli",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "3835618",
+      "name": "项目经验",
+      "font_class": "xiangmujingyan",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "6034639",
+      "name": "实习经历",
+      "font_class": "shixijingli",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "10190975",
+      "name": "实习经历",
+      "font_class": "shixijingli1",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "20398435",
+      "name": "在校经历",
+      "font_class": "zaixiaojingli",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "29705248",
+      "name": "个人技能",
+      "font_class": "gerenjineng1",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "12705236",
+      "name": "基本信息",
+      "font_class": "jibenxinxi",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    }
+  ]
+}

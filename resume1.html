@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./font/demo.css" />
+    <link rel="stylesheet" href="./font/iconfont.css" />
+    <script src="./js/vue.js"></script>
+    <script src="./module.js"></script>
+    <style>
+      li {
+        margin: 0px 10px;
+      }
+      article {
+        width: 100%;
+        /* height: 2000px;
+        border: 1px solid black; */
+      }
+      .me-content {
+        /* margin：上 右 下 左 */
+        margin: 20px 0 0 20px;
+        width: 300px;
+        height: 400px;
+        /* border: 1px solid ; */
+        border-radius: 20px;
+        /* box-shadow: h-offset v-offset blur spread color inset; */
+        box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.5);
+        position: fixed;
+        background: linear-gradient(45deg, white, #5eddf9);
+      }
+      .me-content > .header-content {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+      }
+      .me-content > .header-content > .photo {
+        margin-top: 20px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .experience-content {
+        margin-top: 20px;
+        position: relative;
+        margin-right: 10px;
+        margin-left: 340px;
+        /* border: 1px solid black; */
+        padding: 1rem;
+        box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.5);
+        background: linear-gradient(45deg, white, #5eddf9);
+      }
+      #app .title {
+        border-bottom: 1px solid #5b5b5c;
+      }
+      #app .title > span {
+        margin-left: 10px;
+        font-size: 24px;
+      }
+      .titleBar {
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .internshipExperience > .projects div {
+        margin-top: 5px;
+        font-size: 15px;
+      }
+      .internshipExperience > .projects > li {
+        list-style-type: decimal;
+      }
+      .skills-section > .skill-badge li {
+        font-size: 15px;
+      }
+      .experience-content {
+        min-width: 500px;
+      }
+      .experience-content > .basic-information > .information-list {
+        margin-top: 10px;
+        margin-left: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <article id="app">
+      <section class="me-content">
+        <div class="header-content">
+          <div class="photo">
+            <img src="./static/IMG_5571.JPG" />
+          </div>
+          <h1>董全鑫</h1>
+          <p>前端开发工程师</p>
+          <div class="social-links">
+            <button @click="openGithub">GitHub</button>
+            <button @click="openCsdnHome">csdn</button>
+          </div>
+        </div>
+      </section>
+      <section class="experience-content">
+        <section class="basic-information">
+          <module title="基本信息" icon="&#xe60b;"></module>
+          <div class="information-list">
+            <div
+              style="width: 400px; display: inline-block"
+              v-for="(value,key) in basicInformation"
+              :key="key"
+            >
+              <label for="key">{{value.key}}：</label>
+              <span id="key">{{value.value}}</span>
+            </div>
+          </div>
+        </section>
+
+        <section style="margin-top: 10px" class="skills-section">
+          <module title="个人技能" icon="&#xe600;"></module>
+          <ul class="skill-badge">
+            <li v-for="(skill,index) in skills" :key="index">
+              <b>{{ skill.key }}</b>：{{skill.description}}
+            </li>
+          </ul>
+        </section>
+
+        <section class="education">
+          <module title="教育经历" icon="&#xe65c;"></module>
+          <ul>
+            <li v-for="(item,index) in education" ::key="index">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <span><strong>{{item.time}}</strong></span>
+                <span><strong>{{item.school}}</strong></span>
+                <span><strong>{{item.major}}</strong></span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="school-experience">
+          <module title="在校经历" icon="&#xe63f;"></module>
+          <ul>
+            <li v-for="(item,index) in schoolExp" :key="index">
+              <div class="titleBar">
+                <span><b>{{item.time}}</b></span>
+                <span><b>{{item.department}}</b></span>
+                <span><b>{{item.station}}</b></span>
+              </div>
+              <div>{{item.positionDescription}}</div>
+            </li>
+          </ul>
+        </section>
+
+        <section style="margin-top: 10px" class="internshipExperience">
+          <module title="实习经历" icon="&#xe616;"></module>
+          <div class="titleBar">
+            <span><b>{{experiences[0].period}}</b></span>
+            <span><b>{{experiences[0].company}}</b></span>
+            <span><b>{{experiences[0].station}}</b></span>
+          </div>
+          <ul class="projects">
+            <li v-for="(item,index) in experiences[0].projects" :key="index">
+              <div class="proName"><b>{{item.proName}}</b></div>
+              <div class="proDescription">{{item.proDescription}}</div>
+              <div class="involTech"><b>涉及技术：</b>{{item.involTech}}</div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="project-experience">
+          <module title="项目经验" icon="&#xe63a;"></module>
+          <ul>
+            <li v-for="(item,index) in projectExp" ::key="index">
+              <div>
+                <strong>{{item.name}}</strong>
+                <a :href="item.link" v-if="item.link">demo</a>
+              </div>
+              <div>{{item.personResponsibility}}</div>
+              <div><b>涉及技术：</b>{{item.involvingTechnology}}</div>
+            </li>
+          </ul>
+        </section>
+      </section>
+    </article>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        basicInformation: {
+          englishName: { key: "姓名", value: "董全鑫" },
+          birthDate: { key: "出生年月", value: "1998.07" },
+          nation: { key: "民族", value: "汉族" },
+          height: { key: "身高", value: "173cm" },
+          address: { key: "地址", value: "浙江省杭州市" },
+          politicalOutlook: { key: "政治面貌", value: "中共党员" },
+          phone: { key: "手机号码", value: "15988816911" },
+          school: { key: "毕业院校", value: "浙江理工大学" },
+          email: { key: "电子邮箱", value: "1007703808@qq.com" },
+          eduBackground: { key: "学历", value: "硕士" },
+        },
+        education: [
+          {
+            time: "2016.09-2020.06",
+            school: "浙江理工大学",
+            major: "电子信息科学与技术 本科",
+          },
+          {
+            time: "2020.09-2025.03",
+            school: "浙江理工大学",
+            major: "计算机科学与技术 研究生",
+          },
+        ],
+        skills: [
+          {
+            key: "编程语言",
+            description:
+              "熟悉 C、C#、python、java、sql、js、ts、jquery、html、css、less、php、python 编程语言等。",
+          },
+          {
+            key: "数据结构与算法",
+            description:
+              "熟悉常用的数据结构，如：栈、队列、二叉树等；熟悉贪心、二分查找、动态规划等算法。",
+          },
+          {
+            key: "数据库",
+            description:
+              "熟悉 Redis、Mysql、SQL server 的使用；了解客户端数据库 indexedDB 数据库的使用。",
+          },
+          {
+            key: "开发工具",
+            description:
+              "熟悉使用 VScode、Docker、Pycharm、Datagrip 等；有 Linux 网站项目部署经验。",
+          },
+          {
+            key: "前端框架",
+            description:
+              "熟悉 Vue、React、Flask web 等前端框架；熟悉 Bootstrap、layui、Antd、easyui 以及 Ext.js 组件库的使用。",
+          },
+          {
+            key: "后端框架",
+            description: "了解 SpringBoot、Mybatis、Maven、C# web api 服务等。",
+          },
+          { key: "英语水平", description: "CET-6。" },
+        ],
+        experiences: [
+          {
+            station: "系统运维",
+            company: "杰华特微电子有限公司",
+            period: "2023.10 - 2024.8",
+            projects: [
+              {
+                proName:
+                  "根据其余业务部门所提的需求，在已有的 ERP 系统以及 OA 系统上进行个性化开发。",
+                proDescription:
+                  "负责所属模块的代码开发，测试与维护工作，其中包括公司内部业务流程的创建和维护以及数据的收集、修改与展示。",
+                involTech:
+                  "C#、Jquery、JavaScript、easyui、SQL server 数据库。",
+              },
+              {
+                proName:
+                  "网站部署任务，将所写好的静态页面部署到公网上，并对该项目代码进行改进以及维护。",
+                proDescription:
+                  "在对该项目的原始代码改进的过程中，首先，我引入了 vue 框架中的组件化开发，实现了代码的模块化以及复用；其中，利用 php语言编写了后端程序，实现了前端对服务器中文件的上传、下载以及 mysql 数据库中数据的读取和写入操作。",
+                involTech:
+                  "nginx 服务器、apache 服务器、Linux、icdsoft 网站寄存服务商、Mysql、vue、php、html、css、js 等。",
+              },
+            ],
+          },
+        ],
+        projectExp: [
+          {
+            name: "h5实战项目",
+            personResponsibility:
+              "利用h5相关知识搭建一个前端页面，包括轮播图以及一些动画效果。",
+            involvingTechnology: "canvas画图、3d动画内容（animation）等。",
+            link: "https://jumpandshoot.github.io/h5page/pc%E9%A1%B9%E7%9B%AE.html",
+          },
+          {
+            name: "硅谷云音乐微信小程序",
+            personResponsibility:
+              "搭建一个微信小程序版本的网易云音乐前端页面。",
+            involvingTechnology:
+              "PubSub订阅接收信息、wx.request（）访问网易云音乐后端获取资源。",
+          },
+          {
+            name: "word上传服务器去除水印并加水印（c# web api）（自动化办公）",
+            personResponsibility:
+              "在erp系统中创建相应的前端页面，在后端接收前端所上传的文件并将其进行去水印加水印操作，供给前端浏览。",
+            involvingTechnology:
+              "c#、microsoft.Office.Interop.Word框架操作word（去水印加水印）、iTextSharp给pdf加水印、IIS发布网站等。",
+          },
+          {
+            name: "研究生课题：感知决策型脉冲神经元模型构建研究",
+            personResponsibility:
+              "根据神经元发放脉冲原理构建一个神经元模型，并用其模拟生理神经元的脉冲发放模式，最后用其进行应用（边缘检测）。",
+            involvingTechnology: "python 等。",
+          },
+        ],
+        schoolExp: [
+          {
+            time: "2018.09-2019.07",
+            department: "信息学院社区管理委员会",
+            station: "副主席",
+            positionDescription:
+              "担任信息学院社区管理委员会副主席，主管宣传部和外联部，外联部主要负责社区赞助以及微信推送的编撰，宣传部主要负责活动宣传稿以及活动记录。",
+          },
+          {
+            time: "2021.09-2022.07",
+            department: "计算机科学与技术研究生党支部",
+            station: "副书记",
+            positionDescription:
+              "担任计算机学院计算机科学与技术研究生党支部的副书记，主要负责党支部内部大小事务的处理及安排，传达上级的消息到党支部内部，安排并记录每次党日活动的进展，整理党支部成员的党员材料。",
+          },
+        ],
+      },
+      components: {
+        module: module,
+      },
+      methods: {
+        openGithub() {
+          window.open("https://github.com/JumpAndShoot?tab=repositories");
+        },
+        openCsdnHome() {
+          window.open(
+            "https://blog.csdn.net/weixin_43872912?spm=1000.2115.3001.5343"
+          );
+        },
+      },
+    });
+  </script>
+</html>
